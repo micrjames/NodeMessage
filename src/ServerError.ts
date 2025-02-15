@@ -1,4 +1,5 @@
 import { ServerResponse } from 'http';
+import { sendError } from './responseUtils.js';
 
 export default class ServerError extends Error {
    constructor(message: string, public status: number) {
@@ -7,8 +8,12 @@ export default class ServerError extends Error {
    }
 
    sendResponse(res: ServerResponse) {
+	  /*
 	  res.writeHead(this.status, {'Content-Type': 'text/plain'});
 	  res.end(this.message);
+	  */
+
+	  sendError(res, this.status, this.message);
    }
 
    static handleError(res: ServerResponse, error: Error) {
@@ -19,8 +24,10 @@ export default class ServerError extends Error {
 		 status = error.status;
 		 message = error.message;
 	  }
-
+	  /*
 	  res.writeHead(status, {'Content-Type': 'text/plain'});
 	  res.end(message);
+	  */
+	  sendError(res, status, message);
    }
 }
