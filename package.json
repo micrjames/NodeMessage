@@ -4,8 +4,10 @@
   "description": "A Node.js-based app for sending and retrieving messages via asynchronous HTTP requests.",
   "main": "index.js",
   "scripts": {
+	 "setup": "mkdir build && cp -R src/public build",
 	 "start": "tsc && node ./build/index.js",
-	 "clean": "rm -rf node_modules && rm -rf build"
+	 "clean": "rm -rf node_modules && rm -rf build && cd ./dist && rm -rf $(ls | grep '[^./public]')",
+	 "clean:all": "rm -rf build"
   },
   "type": "module",
   "keywords": [],
