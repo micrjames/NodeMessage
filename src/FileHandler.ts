@@ -22,23 +22,23 @@ export class FileHandler {
       }
     });
    */
-const absolutePath = path.resolve(__dirname, filePath);
-// fs.access(filePath, fs.constants.R_OK, (err) => {
-fs.access(absolutePath, fs.constants.R_OK, (err) => {
-    if (err) {
-      console.error('File access error:', err);
-      sendError(res, 404, 'File not found');
-    } else {
-      // fs.readFile(filePath, (readErr, data) => {
-      fs.readFile(absolutePath, (readErr, data) => {
-        if (readErr) {
-          console.error('Error reading file:', readErr);
-          sendError(res, 500, 'Error reading file');
-        } else {
-          sendResponse(res, 200, 'text/html', data);
-        }
-      });
-    }
-  });
-  }
+   const absolutePath = path.resolve(__dirname, filePath);
+   // fs.access(filePath, fs.constants.R_OK, (err) => {
+   fs.access(absolutePath, fs.constants.R_OK, (err) => {
+	   if (err) {
+		 console.error('File access error:', err);
+		 sendError(res, 404, 'File not found');
+	   } else {
+		 // fs.readFile(filePath, (readErr, data) => {
+		 fs.readFile(absolutePath, (readErr, data) => {
+		   if (readErr) {
+			 console.error('Error reading file:', readErr);
+			 sendError(res, 500, 'Error reading file');
+		   } else {
+			 sendResponse(res, 200, 'text/html', data);
+		   }
+		 });
+	   }
+	 });
+   }
 }

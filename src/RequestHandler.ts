@@ -3,11 +3,11 @@ import url from 'url';
 import { FileHandler } from "./FileHandler.js";
 
 export class RequestHandler {
-  constructor(private fileHandler: FileHandler) {}
+    constructor(private fileHandler: FileHandler, private dirName: string = 'public') {}
 
-  handle(req: http.IncomingMessage, res: http.ServerResponse) {
-    const parsedUrl = url.parse(req.url!, true);		// const parsedUrl = path.parse(req.url, true);
-    const filePath = parsedUrl.pathname === '/' ? './index.html' : parsedUrl.pathname;
-    this.fileHandler.serveFile(res, filePath!);
-  }
+    handle(req: http.IncomingMessage, res: http.ServerResponse) {
+	    const parsedUrl = url.parse(req.url!, true);		// const parsedUrl = path.parse(req.url, true);
+	    const filePath = parsedUrl.pathname === '/' ? './index.html' : parsedUrl.pathname;
+	    this.fileHandler.serveFile(res, `${this.dirName}/${filePath}`!);
+    }
 }
