@@ -1,0 +1,20 @@
+{
+  "name": "nodemessage",
+  "version": "1.0.0",
+  "description": "A Node.js-based app for sending and retrieving messages via asynchronous HTTP requests.",
+  "main": "index.js",
+  "scripts": {
+	 "start": "tsc && node ./build/index.js",
+	 "clean": "rm -rf node_modules && rm -rf build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "express": "^4.21.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
