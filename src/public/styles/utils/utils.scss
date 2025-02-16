@@ -1,0 +1,62 @@
+@use "sass:list"; 
+
+@mixin transition-ease {
+    transition: all 0.5s ease-in-out;
+}
+ 
+@mixin box-shadow($offset-x, $offset-y, $blur-radius, $spread-radius, $color, $inset) {
+   @if($inset) {
+	  box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color $inset;
+   }
+   box-shadow: $offset-x $offset-y $blur-radius $spread-radius $color;
+}
+
+%center-object {
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+%center-object-horz {
+   left: 50%;
+   transform: translateX(-50%);
+}
+%center-object-vert {
+   top: 50%;
+   transform: translateY(-50%);
+}
+%center {
+   justify-content: center;
+   align-items: center;
+}
+
+@mixin set-grid($num-rows: null, $num-cols: null, $center: true) {
+    display: grid;
+	@if($center) {
+	   justify-content: center;
+	   align-content: center;
+	}
+    @if($num-rows) {
+	   grid-template-rows: repeat($num-rows, auto); 
+	}
+    @if($num-cols) {
+	   grid-template-columns: repeat($num-cols, auto);                                         
+	}
+}
+.hidden {
+    display: none;
+}
+%flex {
+   display: flex;
+   flex-direction: column;
+}
+%flex-center {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+%flex-around {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+}

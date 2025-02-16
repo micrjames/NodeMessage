@@ -1,0 +1,17 @@
+@mixin button($font-size, $padding, $margin, $border: none) {
+	display: inline-block;
+	background: #000;
+	color: #fff;
+
+	font-family: inherit;
+	font-size: $font-size;
+	text-decoration: none;
+
+	padding: $padding;
+	margin: $margin;
+
+	border-radius: 5px;
+	border: $border;
+
+	cursor: pointer;
+}

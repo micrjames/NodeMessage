@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export class FileHandler {
-  serveFile(res: http.ServerResponse, filePath: string) {
+  serveFile(res: http.ServerResponse, filePath: string, contentType: string = 'text/html') {
 	 /*
     fs.readFile(filePath, (err, data) => {
       if (err) {
@@ -22,7 +22,8 @@ export class FileHandler {
       }
     });
    */
-   const absolutePath = path.resolve(__dirname, filePath);
+   // not on the same level from 'Server', but one level up -- hence the '../' 
+   const absolutePath = path.resolve(__dirname, `../${filePath}`);
    // fs.access(filePath, fs.constants.R_OK, (err) => {
    fs.access(absolutePath, fs.constants.R_OK, (err) => {
 	   if (err) {
@@ -35,7 +36,7 @@ export class FileHandler {
 			 console.error('Error reading file:', readErr);
 			 sendError(res, 500, 'Error reading file');
 		   } else {
-			 sendResponse(res, 200, 'text/html', data);
+			 sendResponse(res, 200, contentType, data);
 		   }
 		 });
 	   }

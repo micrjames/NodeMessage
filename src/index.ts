@@ -1,4 +1,4 @@
-import Server from "./Server.js";
+import Server from "./libs/Server.js";
 
 const PORT = process.env.PORT || 3000;
 
