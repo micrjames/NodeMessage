@@ -28,7 +28,7 @@ export default class Server {
 		 if(error instanceof ServerError)
 			error.sendResponse(res);
 		 else
-			// ServerError.handleError(res, error as Error);
+			ServerError.handleError(res, error as Error);	// uncomment -- logs all errors consistently
 			console.error('Error handling request:', error);
 			/*
 			res.writeHead(500, {'Content-Type': 'text/plain'});
@@ -43,8 +43,18 @@ export default class Server {
 	  });
    };
 
+   /*
    start() {
 	  // this.server.on('request', this.handleRequest);
 	  this.startServer();
+   }
+   */
+   // server.start().catch(console.error);
+   async start(): Promise<void> {
+	  return new Promise((resolve, reject) => {
+		 this.server.once('error', reject);
+		 this.startServer();
+		 this.server.once('listening', resolve);
+	  });
    }
 }

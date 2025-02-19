@@ -23,9 +23,10 @@ export class FileHandler {
     });
    */
    // not on the same level from 'Server', but one level up -- hence the '../' 
-   const absolutePath = path.resolve(__dirname, `../${filePath}`);
+   // const absolutePath = path.resolve(__dirname, `../${filePath}`);
+   const absolutePath = path.join(__dirname, '..', filePath);
    // fs.access(filePath, fs.constants.R_OK, (err) => {
-   fs.access(absolutePath, fs.constants.R_OK, (err) => {
+   fs.access(absolutePath, fs.constants.R_OK, err => {
 	   if (err) {
 		 console.error('File access error:', err);
 		 sendError(res, 404, 'File not found');
