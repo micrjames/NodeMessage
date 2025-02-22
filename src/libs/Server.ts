@@ -7,7 +7,7 @@ export default class Server {
    private requestHandler: RequestHandler;
    private PORT: string | number;
    constructor(port: string | number, private server: http.Server = http.createServer()) {
-	  this.PORT = typeof port === 'string' ? parseInt(port, 10) : port; // Ensure PORT is a number
+	  this.PORT = typeof port === 'string' ? parseInt(port, 10) : Number(port); // Ensure PORT is a number
 	  const fileHandler = new FileHandler();
 	  this.requestHandler = new RequestHandler(fileHandler);
 	  this.server.on('request', this.handleRequest.bind(this));  // Bind 'this' to maintain context
@@ -25,16 +25,7 @@ export default class Server {
 		 // sendResponse(res, 200, 'text/plain', 'Hello, World!', ResponseAction.WRITE_AND_END);
 		 this.requestHandler.handle(req, res)
 	  } catch(error) {
-		 if(error instanceof ServerError)
-			error.sendResponse(res);
-		 else
-			ServerError.handleError(res, error as Error);	// uncomment -- logs all errors consistently
-			console.error('Error handling request:', error);
-			/*
-			res.writeHead(500, {'Content-Type': 'text/plain'});
-			res.end();
-			*/
-			// sendError(res, 500, ''); 
+		 ServerError.handleError(res, error as Error);
 	  }
    };
    private startServer() {
