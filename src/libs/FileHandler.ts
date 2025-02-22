@@ -38,6 +38,7 @@ export class FileHandler {
 	 try {
 		await fs.access(absolutePath, fs.constants.R_OK);
 		const data = await fs.readFile(absolutePath);
+			// Returns a Promise<Buffer>
 		sendResponse(res, 200, contentType, data);
 	 } catch(error) {
 		if((error as NodeJS.ErrnoException).code === 'ENOENT')

@@ -5,6 +5,10 @@ export enum ResponseAction {
   END_ONLY
 }
 
+export interface IRequestHandler {
+  handle(req: http.IncomingMessage, res: http.ServerResponse): Promise<void>;
+}
+
 export function sendResponse(res: http.ServerResponse, statusCode: number, contentType: string, data: any, action: ResponseAction = ResponseAction.END_ONLY, writeData?: any) {
   res.writeHead(statusCode, {'Content-Type': contentType});
   
